@@ -118,6 +118,4 @@ public class MemberVO extends DTO {
 				+ email + ", teamId=" + teamId + ", loginCount=" + loginCount + ", regDt=" + regDt + ", roleName="
 				+ roleName + "]";
 	}
-	
-	
 }
