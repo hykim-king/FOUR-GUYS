@@ -16,7 +16,7 @@ public class MemberDao implements WorkDiv<MemberVO>, PLog {
 	// TODO: 파일 경로로 변경
 	private final String fileName = "member.csv";
 
-	public static List<MemberVO> members = new ArrayList<>();
+	public static List<MemberVO> members = new ArrayList<MemberVO>();
 
 	public MemberDao() {
 		super();
