@@ -81,9 +81,18 @@ public class MemberDao implements WorkDiv<MemberVO> {
     @Override
     public int doDelete(MemberVO param) {
         int flag = 0;
-
-        flag = members.remove(param) == true ? 1 : 0;
-        writeFile(fileName);
+        
+        for (int i = 0; i < members.size(); i++) {
+        	if (members.get(i).getMemberId().equals(param.getMemberId()) && members.get(i).getPassword().equals(param.getPassword())) {
+        		members.remove(param);
+        		flag = 1;
+        		writeFile(fileName);
+        		break;
+        	}
+        }
+        
+        //flag =  == true ? 1 : 0;
+        //writeFile(fileName);
 
         return flag;
     }
