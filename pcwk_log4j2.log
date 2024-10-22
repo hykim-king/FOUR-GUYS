@@ -1,0 +1,338 @@
+[2024-10-22 16:27:58] DEBUG MemberDao.stringToMember(MemberDao.java:123) - memberStr: pcwk01,이상무01,4321,jamesol@paran.com,1,0,2024/10/17 14:33:00,일반
+[2024-10-22 16:27:58] DEBUG MemberDao.stringToMember(MemberDao.java:123) - memberStr: pcwk02,이상무02,4321,jamesol02@paran.com,1,1,2024/10/17 14:33:00,관리자
+[2024-10-22 16:27:58] DEBUG MemberDao.stringToMember(MemberDao.java:123) - memberStr: pcwk03,이상무03,4321,jamesol03@paran.com,1,0,2024/10/17 14:33:00,일반
+[2024-10-22 16:33:22] DEBUG MemberDao.stringToMember(MemberDao.java:123) - memberStr: pcwk01,이상무01,4321,jamesol@paran.com,1,0,2024/10/17 14:33:00,일반
+[2024-10-22 16:33:22] DEBUG MemberDao.stringToMember(MemberDao.java:123) - memberStr: pcwk02,이상무02,4321,jamesol02@paran.com,1,1,2024/10/17 14:33:00,관리자
+[2024-10-22 16:33:22] DEBUG MemberDao.stringToMember(MemberDao.java:123) - memberStr: pcwk03,이상무03,4321,jamesol03@paran.com,1,0,2024/10/17 14:33:00,일반
+[2024-10-22 16:43:46] DEBUG MemberDao.doRetrieve(MemberDao.java:127) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@66c61024]
+[2024-10-22 16:43:46] DEBUG MemberDao.doRetrieve(MemberDao.java:128) - 2.sql:
+ SELECT                                                      
+     M.MEMBER_ID,         -- 회원 ID                          
+     M.MEMBER_NAME,       -- 사용자명                           
+     M.PASSWORD,          -- 비밀번호                           
+     M.EMAIL,             -- 이메일                            
+     M.BIRTHDAY,          -- 생년월일                           
+     M.CELLPHONE,         -- 핸드폰                            
+     M.LOGIN_COUNT,       -- 로그인 횟수                         
+     T.TEAM_NAME,         -- 팀명                             
+     R.ROLE_NAME,         -- 권한명                            
+     TO_CHAR( M.REG_DT,'yyyy/mm/dd hh24:mi:ss ff') REG_DT    
+ FROM                                                        
+     MEMBER M                                                
+ JOIN                                                        
+     TEAM T ON M.TEAM_ID = T.TEAM_ID                         
+ LEFT JOIN                                                   
+     USER_ROLE UR ON M.MEMBER_ID = UR.MEMBER_ID              
+ LEFT JOIN                                                   
+     ROLE R ON UR.ROLE_ID = R.ROLE_ID                        
+ WHERE M.TEAM_ID = ?                                       
+
+[2024-10-22 16:43:46] DEBUG MemberDao.doRetrieve(MemberDao.java:134) - 3.conn:oracle.jdbc.driver.T4CConnection@282003e1
+[2024-10-22 16:43:46] DEBUG MemberDao.doRetrieve(MemberDao.java:136) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@2c5529ab
+[2024-10-22 16:44:51] DEBUG MemberDao.idCheck(MemberDao.java:268) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@10a9d961]
+[2024-10-22 16:44:51] DEBUG MemberDao.idCheck(MemberDao.java:269) - 2.sql:
+ SELECT COUNT(*) cnt           
+ FROM                          
+     member                    
+ WHERE member_id = ?           
+
+[2024-10-22 16:44:51] DEBUG MemberDao.idCheck(MemberDao.java:274) - 3.conn:oracle.jdbc.driver.T4CConnection@282003e1
+[2024-10-22 16:44:51] DEBUG MemberDao.idCheck(MemberDao.java:276) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@41dd05a
+[2024-10-22 16:44:51] DEBUG MemberDao.idCheck(MemberDao.java:309) - 5. flag:1
+[2024-10-22 16:44:51] DEBUG MemberService.loginCheck(MemberService.java:37) - flag:1
+[2024-10-22 16:44:51] DEBUG MemberDao.passCheck(MemberDao.java:204) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@10a9d961]
+[2024-10-22 16:44:51] DEBUG MemberDao.passCheck(MemberDao.java:205) - 2.sql:
+ SELECT COUNT(*) cnt           
+ FROM                          
+     member                    
+ WHERE member_id = ?           
+ And   PASSWORD  = ?           
+
+[2024-10-22 16:44:51] DEBUG MemberDao.passCheck(MemberDao.java:210) - 3.conn:oracle.jdbc.driver.T4CConnection@4fc5e095
+[2024-10-22 16:44:51] DEBUG MemberDao.passCheck(MemberDao.java:212) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@435871cb
+[2024-10-22 16:44:51] DEBUG MemberDao.passCheck(MemberDao.java:246) - 5. flag:1
+[2024-10-22 16:44:51] DEBUG MemberDao.doSelectOne(MemberDao.java:364) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@10a9d961]
+[2024-10-22 16:44:51] DEBUG MemberDao.doSelectOne(MemberDao.java:365) - 2.sql:
+ SELECT                                                      
+     M.MEMBER_ID,         -- 회원 ID                          
+     M.MEMBER_NAME,       -- 사용자명                           
+     M.PASSWORD,          -- 비밀번호                           
+     M.EMAIL,             -- 이메일                            
+     M.BIRTHDAY,          -- 생년월일                           
+     M.CELLPHONE,         -- 핸드폰                            
+     M.LOGIN_COUNT,       -- 로그인 횟수                         
+     T.TEAM_NAME,         -- 팀명                             
+     R.ROLE_NAME,         -- 권한명                            
+     TO_CHAR( M.REG_DT,'yyyy/mm/dd hh24:mi:ss ff') REG_DT    
+ FROM                                                        
+     MEMBER M                                                
+ JOIN                                                        
+     TEAM T ON M.TEAM_ID = T.TEAM_ID                         
+ LEFT JOIN                                                   
+     USER_ROLE UR ON M.MEMBER_ID = UR.MEMBER_ID              
+ LEFT JOIN                                                   
+     ROLE R ON UR.ROLE_ID = R.ROLE_ID                        
+ WHERE M.MEMBER_ID = ?                                       
+
+[2024-10-22 16:44:51] DEBUG MemberDao.doSelectOne(MemberDao.java:371) - 3.conn:oracle.jdbc.driver.T4CConnection@79da1ec0
+[2024-10-22 16:44:51] DEBUG MemberDao.doSelectOne(MemberDao.java:373) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@19fb8826
+[2024-10-22 16:44:51] DEBUG MemberDao.updateLoginCount(MemberDao.java:52) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@10a9d961]
+[2024-10-22 16:44:51] DEBUG MemberDao.updateLoginCount(MemberDao.java:53) - 2.sql:
+ UPDATE member                            
+ SET                                      
+      login_count = NVL(login_count,0)+1  
+ WHERE                                    
+         member_id = ?                    
+
+[2024-10-22 16:44:51] DEBUG MemberDao.updateLoginCount(MemberDao.java:57) - 3.conn:oracle.jdbc.driver.T4CConnection@1d8062d2
+[2024-10-22 16:44:51] DEBUG MemberDao.updateLoginCount(MemberDao.java:59) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@1e63ec0b
+[2024-10-22 16:44:51] DEBUG MemberDao.updateLoginCount(MemberDao.java:84) - 5. flag:1
+[2024-10-22 16:44:51] DEBUG MemberDao.doRetrieve(MemberDao.java:127) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@10a9d961]
+[2024-10-22 16:44:51] DEBUG MemberDao.doRetrieve(MemberDao.java:128) - 2.sql:
+ SELECT                                                      
+     M.MEMBER_ID,         -- 회원 ID                          
+     M.MEMBER_NAME,       -- 사용자명                           
+     M.PASSWORD,          -- 비밀번호                           
+     M.EMAIL,             -- 이메일                            
+     M.BIRTHDAY,          -- 생년월일                           
+     M.CELLPHONE,         -- 핸드폰                            
+     M.LOGIN_COUNT,       -- 로그인 횟수                         
+     T.TEAM_NAME,         -- 팀명                             
+     R.ROLE_NAME,         -- 권한명                            
+     TO_CHAR( M.REG_DT,'yyyy/mm/dd hh24:mi:ss ff') REG_DT    
+ FROM                                                        
+     MEMBER M                                                
+ JOIN                                                        
+     TEAM T ON M.TEAM_ID = T.TEAM_ID                         
+ LEFT JOIN                                                   
+     USER_ROLE UR ON M.MEMBER_ID = UR.MEMBER_ID              
+ LEFT JOIN                                                   
+     ROLE R ON UR.ROLE_ID = R.ROLE_ID                        
+ WHERE M.TEAM_ID = ?                                       
+
+[2024-10-22 16:44:51] DEBUG MemberDao.doRetrieve(MemberDao.java:134) - 3.conn:oracle.jdbc.driver.T4CConnection@285c08c8
+[2024-10-22 16:44:51] DEBUG MemberDao.doRetrieve(MemberDao.java:136) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@295eaa7c
+[2024-10-22 16:44:57] DEBUG MemberDao.idCheck(MemberDao.java:268) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@35432107]
+[2024-10-22 16:44:57] DEBUG MemberDao.idCheck(MemberDao.java:269) - 2.sql:
+ SELECT COUNT(*) cnt           
+ FROM                          
+     member                    
+ WHERE member_id = ?           
+
+[2024-10-22 16:44:57] DEBUG MemberDao.idCheck(MemberDao.java:274) - 3.conn:oracle.jdbc.driver.T4CConnection@282003e1
+[2024-10-22 16:44:57] DEBUG MemberDao.idCheck(MemberDao.java:276) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@51972dc7
+[2024-10-22 16:44:57] DEBUG MemberDao.idCheck(MemberDao.java:309) - 5. flag:1
+[2024-10-22 16:44:57] DEBUG MemberService.loginCheck(MemberService.java:37) - flag:1
+[2024-10-22 16:44:57] DEBUG MemberDao.passCheck(MemberDao.java:204) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@35432107]
+[2024-10-22 16:44:57] DEBUG MemberDao.passCheck(MemberDao.java:205) - 2.sql:
+ SELECT COUNT(*) cnt           
+ FROM                          
+     member                    
+ WHERE member_id = ?           
+ And   PASSWORD  = ?           
+
+[2024-10-22 16:44:57] DEBUG MemberDao.passCheck(MemberDao.java:210) - 3.conn:oracle.jdbc.driver.T4CConnection@16ecee1
+[2024-10-22 16:44:57] DEBUG MemberDao.passCheck(MemberDao.java:212) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@3b220bcb
+[2024-10-22 16:44:57] DEBUG MemberDao.passCheck(MemberDao.java:246) - 5. flag:1
+[2024-10-22 16:44:57] DEBUG MemberDao.doSelectOne(MemberDao.java:364) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@35432107]
+[2024-10-22 16:44:57] DEBUG MemberDao.doSelectOne(MemberDao.java:365) - 2.sql:
+ SELECT                                                      
+     M.MEMBER_ID,         -- 회원 ID                          
+     M.MEMBER_NAME,       -- 사용자명                           
+     M.PASSWORD,          -- 비밀번호                           
+     M.EMAIL,             -- 이메일                            
+     M.BIRTHDAY,          -- 생년월일                           
+     M.CELLPHONE,         -- 핸드폰                            
+     M.LOGIN_COUNT,       -- 로그인 횟수                         
+     T.TEAM_NAME,         -- 팀명                             
+     R.ROLE_NAME,         -- 권한명                            
+     TO_CHAR( M.REG_DT,'yyyy/mm/dd hh24:mi:ss ff') REG_DT    
+ FROM                                                        
+     MEMBER M                                                
+ JOIN                                                        
+     TEAM T ON M.TEAM_ID = T.TEAM_ID                         
+ LEFT JOIN                                                   
+     USER_ROLE UR ON M.MEMBER_ID = UR.MEMBER_ID              
+ LEFT JOIN                                                   
+     ROLE R ON UR.ROLE_ID = R.ROLE_ID                        
+ WHERE M.MEMBER_ID = ?                                       
+
+[2024-10-22 16:44:57] DEBUG MemberDao.doSelectOne(MemberDao.java:371) - 3.conn:oracle.jdbc.driver.T4CConnection@4a3329b9
+[2024-10-22 16:44:57] DEBUG MemberDao.doSelectOne(MemberDao.java:373) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@3dddefd8
+[2024-10-22 16:44:57] DEBUG MemberDao.updateLoginCount(MemberDao.java:52) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@35432107]
+[2024-10-22 16:44:57] DEBUG MemberDao.updateLoginCount(MemberDao.java:53) - 2.sql:
+ UPDATE member                            
+ SET                                      
+      login_count = NVL(login_count,0)+1  
+ WHERE                                    
+         member_id = ?                    
+
+[2024-10-22 16:44:57] DEBUG MemberDao.updateLoginCount(MemberDao.java:57) - 3.conn:oracle.jdbc.driver.T4CConnection@7be58f16
+[2024-10-22 16:44:57] DEBUG MemberDao.updateLoginCount(MemberDao.java:59) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@242aa8d9
+[2024-10-22 16:44:58] DEBUG MemberDao.updateLoginCount(MemberDao.java:84) - 5. flag:1
+[2024-10-22 16:45:08] DEBUG MemberDao.idCheck(MemberDao.java:268) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@5f9be66c]
+[2024-10-22 16:45:08] DEBUG MemberDao.idCheck(MemberDao.java:269) - 2.sql:
+ SELECT COUNT(*) cnt           
+ FROM                          
+     member                    
+ WHERE member_id = ?           
+
+[2024-10-22 16:45:08] DEBUG MemberDao.idCheck(MemberDao.java:274) - 3.conn:oracle.jdbc.driver.T4CConnection@282003e1
+[2024-10-22 16:45:08] DEBUG MemberDao.idCheck(MemberDao.java:276) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@72c28d64
+[2024-10-22 16:45:08] DEBUG MemberDao.idCheck(MemberDao.java:309) - 5. flag:1
+[2024-10-22 16:45:08] DEBUG MemberService.loginCheck(MemberService.java:37) - flag:1
+[2024-10-22 16:45:08] DEBUG MemberDao.passCheck(MemberDao.java:204) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@5f9be66c]
+[2024-10-22 16:45:08] DEBUG MemberDao.passCheck(MemberDao.java:205) - 2.sql:
+ SELECT COUNT(*) cnt           
+ FROM                          
+     member                    
+ WHERE member_id = ?           
+ And   PASSWORD  = ?           
+
+[2024-10-22 16:45:08] DEBUG MemberDao.passCheck(MemberDao.java:210) - 3.conn:oracle.jdbc.driver.T4CConnection@556d0826
+[2024-10-22 16:45:08] DEBUG MemberDao.passCheck(MemberDao.java:212) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@66ce957f
+[2024-10-22 16:45:08] DEBUG MemberDao.passCheck(MemberDao.java:246) - 5. flag:1
+[2024-10-22 16:45:08] DEBUG MemberDao.doSelectOne(MemberDao.java:364) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@5f9be66c]
+[2024-10-22 16:45:08] DEBUG MemberDao.doSelectOne(MemberDao.java:365) - 2.sql:
+ SELECT                                                      
+     M.MEMBER_ID,         -- 회원 ID                          
+     M.MEMBER_NAME,       -- 사용자명                           
+     M.PASSWORD,          -- 비밀번호                           
+     M.EMAIL,             -- 이메일                            
+     M.BIRTHDAY,          -- 생년월일                           
+     M.CELLPHONE,         -- 핸드폰                            
+     M.LOGIN_COUNT,       -- 로그인 횟수                         
+     T.TEAM_NAME,         -- 팀명                             
+     R.ROLE_NAME,         -- 권한명                            
+     TO_CHAR( M.REG_DT,'yyyy/mm/dd hh24:mi:ss ff') REG_DT    
+ FROM                                                        
+     MEMBER M                                                
+ JOIN                                                        
+     TEAM T ON M.TEAM_ID = T.TEAM_ID                         
+ LEFT JOIN                                                   
+     USER_ROLE UR ON M.MEMBER_ID = UR.MEMBER_ID              
+ LEFT JOIN                                                   
+     ROLE R ON UR.ROLE_ID = R.ROLE_ID                        
+ WHERE M.MEMBER_ID = ?                                       
+
+[2024-10-22 16:45:08] DEBUG MemberDao.doSelectOne(MemberDao.java:371) - 3.conn:oracle.jdbc.driver.T4CConnection@5bfa8cc5
+[2024-10-22 16:45:08] DEBUG MemberDao.doSelectOne(MemberDao.java:373) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@666b83a4
+[2024-10-22 16:45:08] DEBUG MemberDao.updateLoginCount(MemberDao.java:52) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@5f9be66c]
+[2024-10-22 16:45:08] DEBUG MemberDao.updateLoginCount(MemberDao.java:53) - 2.sql:
+ UPDATE member                            
+ SET                                      
+      login_count = NVL(login_count,0)+1  
+ WHERE                                    
+         member_id = ?                    
+
+[2024-10-22 16:45:08] DEBUG MemberDao.updateLoginCount(MemberDao.java:57) - 3.conn:oracle.jdbc.driver.T4CConnection@388ba540
+[2024-10-22 16:45:08] DEBUG MemberDao.updateLoginCount(MemberDao.java:59) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@47605f2f
+[2024-10-22 16:45:08] DEBUG MemberDao.updateLoginCount(MemberDao.java:84) - 5. flag:1
+[2024-10-22 16:45:48] DEBUG MemberDao.idCheck(MemberDao.java:268) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@363a52f]
+[2024-10-22 16:45:48] DEBUG MemberDao.idCheck(MemberDao.java:269) - 2.sql:
+ SELECT COUNT(*) cnt           
+ FROM                          
+     member                    
+ WHERE member_id = ?           
+
+[2024-10-22 16:45:48] DEBUG MemberDao.idCheck(MemberDao.java:274) - 3.conn:oracle.jdbc.driver.T4CConnection@282003e1
+[2024-10-22 16:45:48] DEBUG MemberDao.idCheck(MemberDao.java:276) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@1b765a2c
+[2024-10-22 16:45:48] DEBUG MemberDao.idCheck(MemberDao.java:309) - 5. flag:1
+[2024-10-22 16:45:48] DEBUG MemberService.loginCheck(MemberService.java:37) - flag:1
+[2024-10-22 16:45:48] DEBUG MemberDao.passCheck(MemberDao.java:204) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@363a52f]
+[2024-10-22 16:45:48] DEBUG MemberDao.passCheck(MemberDao.java:205) - 2.sql:
+ SELECT COUNT(*) cnt           
+ FROM                          
+     member                    
+ WHERE member_id = ?           
+ And   PASSWORD  = ?           
+
+[2024-10-22 16:45:48] DEBUG MemberDao.passCheck(MemberDao.java:210) - 3.conn:oracle.jdbc.driver.T4CConnection@19fb8826
+[2024-10-22 16:45:48] DEBUG MemberDao.passCheck(MemberDao.java:212) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@192d74fb
+[2024-10-22 16:45:48] DEBUG MemberDao.passCheck(MemberDao.java:246) - 5. flag:1
+[2024-10-22 16:45:48] DEBUG MemberDao.doSelectOne(MemberDao.java:364) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@363a52f]
+[2024-10-22 16:45:48] DEBUG MemberDao.doSelectOne(MemberDao.java:365) - 2.sql:
+ SELECT                                                      
+     M.MEMBER_ID,         -- 회원 ID                          
+     M.MEMBER_NAME,       -- 사용자명                           
+     M.PASSWORD,          -- 비밀번호                           
+     M.EMAIL,             -- 이메일                            
+     M.BIRTHDAY,          -- 생년월일                           
+     M.CELLPHONE,         -- 핸드폰                            
+     M.LOGIN_COUNT,       -- 로그인 횟수                         
+     T.TEAM_NAME,         -- 팀명                             
+     R.ROLE_NAME,         -- 권한명                            
+     TO_CHAR( M.REG_DT,'yyyy/mm/dd hh24:mi:ss ff') REG_DT    
+ FROM                                                        
+     MEMBER M                                                
+ JOIN                                                        
+     TEAM T ON M.TEAM_ID = T.TEAM_ID                         
+ LEFT JOIN                                                   
+     USER_ROLE UR ON M.MEMBER_ID = UR.MEMBER_ID              
+ LEFT JOIN                                                   
+     ROLE R ON UR.ROLE_ID = R.ROLE_ID                        
+ WHERE M.MEMBER_ID = ?                                       
+
+[2024-10-22 16:45:48] DEBUG MemberDao.doSelectOne(MemberDao.java:371) - 3.conn:oracle.jdbc.driver.T4CConnection@62ea3440
+[2024-10-22 16:45:48] DEBUG MemberDao.doSelectOne(MemberDao.java:373) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@27953a83
+[2024-10-22 16:45:48] DEBUG MemberDao.updateLoginCount(MemberDao.java:52) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@363a52f]
+[2024-10-22 16:45:48] DEBUG MemberDao.updateLoginCount(MemberDao.java:53) - 2.sql:
+ UPDATE member                            
+ SET                                      
+      login_count = NVL(login_count,0)+1  
+ WHERE                                    
+         member_id = ?                    
+
+[2024-10-22 16:45:48] DEBUG MemberDao.updateLoginCount(MemberDao.java:57) - 3.conn:oracle.jdbc.driver.T4CConnection@285c08c8
+[2024-10-22 16:45:48] DEBUG MemberDao.updateLoginCount(MemberDao.java:59) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@295eaa7c
+[2024-10-22 16:45:48] DEBUG MemberDao.updateLoginCount(MemberDao.java:84) - 5. flag:1
+[2024-10-22 16:46:50] DEBUG MemberDao.doRetrieve(MemberDao.java:127) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@265adfad]
+[2024-10-22 16:46:50] DEBUG MemberDao.doRetrieve(MemberDao.java:128) - 2.sql:
+ SELECT                                                      
+     M.MEMBER_ID,         -- 회원 ID                          
+     M.MEMBER_NAME,       -- 사용자명                           
+     M.PASSWORD,          -- 비밀번호                           
+     M.EMAIL,             -- 이메일                            
+     M.BIRTHDAY,          -- 생년월일                           
+     M.CELLPHONE,         -- 핸드폰                            
+     M.LOGIN_COUNT,       -- 로그인 횟수                         
+     T.TEAM_NAME,         -- 팀명                             
+     R.ROLE_NAME,         -- 권한명                            
+     TO_CHAR( M.REG_DT,'yyyy/mm/dd hh24:mi:ss ff') REG_DT    
+ FROM                                                        
+     MEMBER M                                                
+ JOIN                                                        
+     TEAM T ON M.TEAM_ID = T.TEAM_ID                         
+ LEFT JOIN                                                   
+     USER_ROLE UR ON M.MEMBER_ID = UR.MEMBER_ID              
+ LEFT JOIN                                                   
+     ROLE R ON UR.ROLE_ID = R.ROLE_ID                        
+ WHERE M.TEAM_ID = ?                                       
+
+[2024-10-22 16:46:50] DEBUG MemberDao.doRetrieve(MemberDao.java:134) - 3.conn:oracle.jdbc.driver.T4CConnection@282003e1
+[2024-10-22 16:46:50] DEBUG MemberDao.doRetrieve(MemberDao.java:136) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@5911e990
+[2024-10-22 17:01:29] DEBUG MemberDao.doRetrieve(MemberDao.java:127) - 1.param:MemberDTO [memberId=james01, memberName=null, password=4321, email=null, birthday=null, cellphone=null, loginCount=0, teamId=3, regDt=null, teamName=null, roleName=null, toString()=net.pcwk.ehr.member.MemberDTO@5f9be66c]
+[2024-10-22 17:01:29] DEBUG MemberDao.doRetrieve(MemberDao.java:128) - 2.sql:
+ SELECT                                                      
+     M.MEMBER_ID,         -- 회원 ID                          
+     M.MEMBER_NAME,       -- 사용자명                           
+     M.PASSWORD,          -- 비밀번호                           
+     M.EMAIL,             -- 이메일                            
+     M.BIRTHDAY,          -- 생년월일                           
+     M.CELLPHONE,         -- 핸드폰                            
+     M.LOGIN_COUNT,       -- 로그인 횟수                         
+     T.TEAM_NAME,         -- 팀명                             
+     R.ROLE_NAME,         -- 권한명                            
+     TO_CHAR( M.REG_DT,'yyyy/mm/dd hh24:mi:ss ff') REG_DT    
+ FROM                                                        
+     MEMBER M                                                
+ JOIN                                                        
+     TEAM T ON M.TEAM_ID = T.TEAM_ID                         
+ LEFT JOIN                                                   
+     USER_ROLE UR ON M.MEMBER_ID = UR.MEMBER_ID              
+ LEFT JOIN                                                   
+     ROLE R ON UR.ROLE_ID = R.ROLE_ID                        
+ WHERE M.TEAM_ID = ?                                       
+
+[2024-10-22 17:01:29] DEBUG MemberDao.doRetrieve(MemberDao.java:134) - 3.conn:oracle.jdbc.driver.T4CConnection@365c30cc
+[2024-10-22 17:01:29] DEBUG MemberDao.doRetrieve(MemberDao.java:136) - 3.1pstmt:oracle.jdbc.driver.OraclePreparedStatementWrapper@72c28d64
