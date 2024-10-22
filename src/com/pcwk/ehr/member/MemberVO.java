@@ -9,8 +9,7 @@ public class MemberVO extends DTO {
 	private String memberName; // 이름
 	private String password;   // 비번
 	private String email;      // 이메일
-	private int    teamId;     // 팀ID
-	private int    loginCount; // 로그인 수
+	private String birthDate;  // 생년월일
 	private String regDt;      // 가입일
 	private String roleName;   // 권한명
 	
@@ -18,15 +17,14 @@ public class MemberVO extends DTO {
 		super();
 	}
 
-	public MemberVO(String memberId, String memberName, String password, String email, int teamId, int loginCount,
+	public MemberVO(String memberId, String memberName, String password, String email, String birthDate,
 			String regDt, String roleName) {
 		super();
 		this.memberId = memberId;
 		this.memberName = memberName;
 		this.password = password;
 		this.email = email;
-		this.teamId = teamId;
-		this.loginCount = loginCount;
+		this.birthDate = birthDate;
 		this.regDt = regDt;
 		this.roleName = roleName;
 	}
@@ -63,20 +61,12 @@ public class MemberVO extends DTO {
 		this.email = email;
 	}
 
-	public int getTeamId() {
-		return teamId;
+	public String getBirthDate() {
+		return birthDate;
 	}
 
-	public void setTeamId(int teamId) {
-		this.teamId = teamId;
-	}
-
-	public int getLoginCount() {
-		return loginCount;
-	}
-
-	public void setLoginCount(int loginCount) {
-		this.loginCount = loginCount;
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public String getRegDt() {
@@ -115,7 +105,7 @@ public class MemberVO extends DTO {
 	@Override
 	public String toString() {
 		return "MemberVO [memberId=" + memberId + ", memberName=" + memberName + ", password=" + password + ", email="
-				+ email + ", teamId=" + teamId + ", loginCount=" + loginCount + ", regDt=" + regDt + ", roleName="
+				+ email + ", birthDate=" + birthDate + ", regDt=" + regDt + ", roleName="
 				+ roleName + "]";
 	}
 }

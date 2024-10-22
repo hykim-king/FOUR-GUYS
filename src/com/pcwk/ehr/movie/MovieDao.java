@@ -112,7 +112,7 @@ public class MovieDao implements WorkDiv<MovieVO> {
 		String movieStr = data;
 		System.out.println("movieStr: " + movieStr);
 		
-		String[] movieArr = movieStr.split(",");
+		String[] movieArr = movieStr.split("|");
 		
 		String movieId = movieArr[0];
 		String movieTitle = movieArr[1];

@@ -1,9 +1,5 @@
 package com.pcwk.ehr.movie;
 
-import com.pcwk.ehr.member.MemberDao;
-import com.pcwk.ehr.member.MemberDaoMain;
-import com.pcwk.ehr.member.MemberVO;
-
 public class MovieDaoMain {
 	
 	MovieVO movie01 = null;
@@ -13,8 +9,8 @@ public class MovieDaoMain {
 	
 	public MovieDaoMain() {
 		dao = new MovieDao();
-		movie01 = new MovieVO("","Venom","Action","10/10/2024","USA",110,15,"James","Tom Hadi",8.6);
-		movie02 = new MovieVO("","Venom","Action","10/10/2024","USA",110,15,"James","Tom Hadi",8.6);
+		movie01 = new MovieVO("20","Venom","Action","10/10/2024","USA",110,15,"James","Tom Hadi",8.6);
+		movie02 = new MovieVO("21","Venom","Action","10/10/2024","USA",110,15,"James","Tom Hadi",8.6);
 	}
 	
 	public void doSave() {
