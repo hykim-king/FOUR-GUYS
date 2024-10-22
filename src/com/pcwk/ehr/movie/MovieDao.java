@@ -114,18 +114,18 @@ public class MovieDao implements WorkDiv<MovieVO> {
 		
 		String[] movieArr = movieStr.split(",");
 		
-		String movieId = movieArr[0];
-		String movieTitle = movieArr[1];
-		String genre = movieArr[2];
-		String releaseDate = movieArr[3];
-		String country = movieArr[4];
-		int runningTime = Integer.parseInt(movieArr[5]);
-		int filmRatings = Integer.parseInt(movieArr[6]);
-		String director = movieArr[7];
-		String actor = movieArr[8];
-		double movieRate = Double.parseDouble(movieArr[9]);
+		//String movieId = movieArr[0];
+		String movieTitle = movieArr[0];
+		String genre = movieArr[1];
+		String releaseDate = movieArr[2];
+		String country = movieArr[3];
+		int runningTime = Integer.parseInt(movieArr[4]);
+		int filmRatings = Integer.parseInt(movieArr[5]);
+		String director = movieArr[6];
+		String actor = movieArr[7];
+		double movieRate = Double.parseDouble(movieArr[8]);
 		
-		out = new MovieVO(movieId, movieTitle, genre, releaseDate, country, runningTime, filmRatings, director, actor, movieRate);
+		out = new MovieVO(movieTitle, genre, releaseDate, country, runningTime, filmRatings, director, actor, movieRate);
 		
 		return out;
 	}

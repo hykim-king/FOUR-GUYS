@@ -40,10 +40,9 @@ public class MovieVO extends DTO {
 	}
 	
 	// 모든 필드를 포함한 생성자
-	public MovieVO(String movieId, String movieTitle, String genre, String releaseDate, String country, int runningTime,
+	public MovieVO(String movieTitle, String genre, String releaseDate, String country, int runningTime,
 			int filmRatings, String director, String actor, double movieRate) {
 		super();
-		this.movieId = movieId;
 		this.movieTitle = movieTitle;
 		this.genre = genre;
 		this.releaseDate = releaseDate;
