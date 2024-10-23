@@ -15,7 +15,19 @@ public class MemberDaoMain {
 		dao = new MemberDao();
 		//registerMember = new MemberVO(mId, mName, mPw, email, bDate, registerDate, "user");
 	}
+	
+	// 로그인
+	public void login(String mId, String mPw) {
+		MemberVO outVO = dao.login(mId, mPw);
+		
+		if (outVO != null) {
+			System.out.println("로그인 성공: " + outVO.getMemberName() + "님");
+		} else {
+			System.out.println("로그인 실패");
+		}
+	}
 
+	// 멤버 등록
 	public void doSave(String mId, String mName, String mPw, String email, String bDate) {
 		System.out.println("회원 등록");
 		registerMember = new MemberVO(mId, mName, mPw, email, bDate, registerDate, "user");
@@ -34,25 +46,14 @@ public class MemberDaoMain {
 
 		dao.displayList(MemberDao.members);
 	}
-
-	public void doDelete(String mId, String mPw) {
-		System.out.println("멤버 탈퇴");
+	// 멤버 전체 조회
+	public void doDisplay() {
+		System.out.println("멤버 전체 조회");
 		
-		MemberVO outVO = new MemberVO();
-		
-		outVO.setMemberId(mId);
-		outVO.setPassword(mPw);
-		
-		int flag = dao.doDelete(outVO);
-		
-		if (flag == 1) {
-			System.out.println(mId + "삭제 성공");
-		} else {
-			System.out.println(mId + "삭제 실패");
-		}
 		dao.displayList(MemberDao.members);
 	}
-
+	
+	// 멤버 단건 조회
 	public MemberVO doSelectOne(String mId) {
 		System.out.println("\n회원 조회");
 		MemberVO param = new MemberVO();
@@ -67,8 +68,9 @@ public class MemberDaoMain {
 			System.out.println("************************************");
 		}
 		return outVO;
-	}
-	
+	}	
+
+	// 멤버 정보 수정
 	public void doUpdate(String mId, String mName, String mPw, String email, String bDate) {
 		System.out.println("멤버 정보 수정");
 		
@@ -87,16 +89,26 @@ public class MemberDaoMain {
 		dao.displayList(MemberDao.members);
 	}
 
-	public void login(String mId, String mPw) {
-		MemberVO outVO = dao.login(mId, mPw);
+	// 멤버 탈퇴
+	public void doDelete(String mId, String mPw) {
+		System.out.println("멤버 탈퇴");
 		
-		if (outVO != null) {
-			System.out.println("로그인 성공: " + outVO.getMemberName() + "님");
+		MemberVO outVO = new MemberVO();
+		
+		outVO.setMemberId(mId);
+		outVO.setPassword(mPw);
+		
+		int flag = dao.doDelete(outVO);
+		
+		if (flag == 1) {
+			System.out.println(mId + "삭제 성공");
 		} else {
-			System.out.println("로그인 실패");
+			System.out.println(mId + "삭제 실패");
 		}
+		dao.displayList(MemberDao.members);
 	}
-
+	
+	// 아이디 찾기
 	public void findId(String email, String mName) {
 		MemberVO outVO = dao.findMemberIdByEmail(email, mName);
 
@@ -107,6 +119,7 @@ public class MemberDaoMain {
 		}
 	}
 
+	// 비밀번호 찾기
 	public void findPassword(String mId, String email, String mName, String bDate) {
 		MemberVO outVO = dao.findMemberPwByEmail(mId, email, mName, bDate);
 		
@@ -131,15 +144,17 @@ public class MemberDaoMain {
 
 		while (run) {
 			System.out.println("환영합니다. 멤버 관리 메뉴입니다.");
-			System.out.println("--------------------------");
+			System.out.println("-----------------------");
 			System.out.println("1. 로그인");
 			System.out.println("2. 멤버 등록");
-			System.out.println("3. 멤버 조회");
-			System.out.println("4. 멤버 탈퇴");
-			System.out.println("5. 멤버 수정");
-			System.out.println("6. 아이디 찾기");
-			System.out.println("7. 비밀번호 찾기");
+			System.out.println("3. 멤버 전체 조회");
+			System.out.println("4. 멤버 단건 조회");
+			System.out.println("5. 멤버 정보 수정");
+			System.out.println("6. 멤버 탈퇴");
+			System.out.println("7. 아이디 찾기");
+			System.out.println("8. 비밀번호 찾기");
 			System.out.println("0. 프로그램 종료");
+			System.out.println("-----------------------");
 			System.out.print("항목을 선택하세요: ");
 			int menu = sc.nextInt();
 
@@ -171,26 +186,21 @@ public class MemberDaoMain {
 				
 				break;
 			case 3:
-				System.out.println("----------멤버 조회----------");
-				System.out.print("아이디를 입력하세요: ");
+				System.out.println("----------멤버 전체 조회----------");
+				main.doDisplay();
+				
+				break;
+			case 4:
+				System.out.println("----------멤버 단건 조회----------");
+				System.out.print("검색할 아이디를 입력하세요: ");
 				mId = sc.next();
 				
 				main.doSelectOne(mId);
 				
 				break;
-			case 4:
-				System.out.println("----------멤버 탈퇴----------");
-				System.out.print("아이디를 입력하세요: ");
-				mId = sc.next();
-				System.out.print("비밀번호를 입력하세요: ");
-			    mPw = sc.next();
-				
-				main.doDelete(mId, mPw);
-				
-				break;
 			case 5:
-				System.out.println("----------멤버 수정----------");
-				System.out.println("수정할 아이디를 입력하세요: ");
+				System.out.println("----------멤버 정보 수정----------");
+				System.out.print("수정할 아이디를 입력하세요: ");
 				mId = sc.next();
 				
 				MemberVO existingMember = main.doSelectOne(mId);
@@ -198,12 +208,12 @@ public class MemberDaoMain {
 					break;
 				}
 				
-				System.out.println("수정할 항목을 선택하세요");
 				System.out.println("---------------");
 			    System.out.println("1. 이름 수정");
 			    System.out.println("2. 비밀번호 수정");
 			    System.out.println("3. 이메일 수정");
 			    System.out.println("4. 생일 수정");
+			    System.out.println("---------------");
 			    System.out.print("항목을 선택하세요: ");
 			    int input = sc.nextInt();
 			    
@@ -237,6 +247,16 @@ public class MemberDaoMain {
 				
 				break;
 			case 6:
+				System.out.println("----------멤버 탈퇴----------");
+				System.out.print("아이디를 입력하세요: ");
+				mId = sc.next();
+				System.out.print("비밀번호를 입력하세요: ");
+			    mPw = sc.next();
+				
+				main.doDelete(mId, mPw);
+				
+				break;
+			case 7:
 				System.out.println("----------아이디 찾기----------");
 				System.out.print("이메일을 입력하세요: ");
                 email = sc.next();
@@ -246,7 +266,7 @@ public class MemberDaoMain {
                 main.findId(email, mName);
                 
                 break;
-			case 7:
+			case 8:
 				System.out.println("----------비밀번호 찾기----------");
 				System.out.print("아이디를 입력하세요: ");
                 mId = sc.next();
@@ -269,20 +289,5 @@ public class MemberDaoMain {
 			}
 		}
 		sc.close();
-
-		// 등록
-		// main.doSave();
-
-		// 삭제
-		// main.doDelete();
-
-		// 단건 조회
-		
-
-		// 로그인 테스트
-		// main.login();
-
-		// 비밀번호 찾기
-		// main.findPassword();
 	}
 }
