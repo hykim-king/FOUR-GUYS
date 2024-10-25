@@ -6,42 +6,22 @@ import com.pcwk.ehr.cmn.DTO;
 
 public class MovieVO extends DTO {
 	// 영화 정보 변수
-	private String movieId;		// 영화 ID
-	private String movieTitle;	// 영화 제목
-	private String genre;		// 영화 장르
-	private String releaseDate;	// 개봉 일자
-	private String country;		// 제작 국가
-	private int    runningTime;	// 러닝 타임
-	private int    filmRatings;	// 상영 등급
-	private String director;	// 감독
-	private String actor;		// 배우
-	private double movieRate;	// 영화 평점
-	
-	// 기본 생성자
+	private int movieId; // 영화 ID
+	private String movieTitle; // 영화 제목
+	private String genre; // 영화 장르
+	private String releaseDate; // 개봉 일자
+	private String country; // 제작 국가
+	private int runningTime; // 러닝 타임
+	private int filmRatings; // 상영 등급
+	private String director; // 감독
+	private String actor; // 배우
+
 	public MovieVO() {
 		super();
 	}
-	
-	// 인자 1개짜리 생성자 -> 영화명, 장르, 감독의 해시코드를 합쳐 영화코드 생성
-	public MovieVO(String movieTitle, String genre, String director) {
-		this.movieTitle = movieTitle;
-		this.genre = genre;
-		this.director = director;
-		this.movieId = generateMovieId(movieTitle, genre, director);
-	}
-	
-	// 영화 코드 생성 메소드(영화 제목, 장르, 감독의 hashCode 조합)
-	public String generateMovieId(String movieTitle, String genre, String director) {
-		int titleHash = Objects.hashCode(movieTitle);
-		int genreHash = Objects.hashCode(genre);
-		int directorHash = Objects.hashCode(director);
-		
-		return Integer.toString(titleHash + genreHash + directorHash);
-	}
-	
-	// 모든 필드를 포함한 생성자
-	public MovieVO(String movieId, String movieTitle, String genre, String releaseDate, String country, int runningTime,
-			int filmRatings, String director, String actor, double movieRate) {
+
+	public MovieVO(int movieId, String movieTitle, String genre, String releaseDate, String country, int runningTime,
+			int filmRatings, String director, String actor) {
 		super();
 		this.movieId = movieId;
 		this.movieTitle = movieTitle;
@@ -52,11 +32,14 @@ public class MovieVO extends DTO {
 		this.filmRatings = filmRatings;
 		this.director = director;
 		this.actor = actor;
-		this.movieRate = movieRate;
 	}
 
-	public String getMovieId() {
+	public int getMovieId() {
 		return movieId;
+	}
+
+	public void setMovieId(int movieId) {
+		this.movieId = movieId;
 	}
 
 	public String getMovieTitle() {
@@ -65,7 +48,6 @@ public class MovieVO extends DTO {
 
 	public void setMovieTitle(String movieTitle) {
 		this.movieTitle = movieTitle;
-		this.movieId = generateMovieId(this.movieTitle, this.genre, this.director);
 	}
 
 	public String getGenre() {
@@ -74,7 +56,6 @@ public class MovieVO extends DTO {
 
 	public void setGenre(String genre) {
 		this.genre = genre;
-		this.movieId = generateMovieId(this.movieTitle, this.genre, this.director);
 	}
 
 	public String getReleaseDate() {
@@ -115,7 +96,6 @@ public class MovieVO extends DTO {
 
 	public void setDirector(String director) {
 		this.director = director;
-		this.movieId = generateMovieId(this.movieTitle, this.genre, this.director);
 	}
 
 	public String getActor() {
@@ -126,17 +106,9 @@ public class MovieVO extends DTO {
 		this.actor = actor;
 	}
 
-	public double getMovieRate() {
-		return movieRate;
-	}
-
-	public void setMovieRate(double movieRate) {
-		this.movieRate = movieRate;
-	}
-	
 	@Override
 	public int hashCode() {
-		return Objects.hash(movieId);
+		return Objects.hash(director, movieTitle, releaseDate);
 	}
 
 	@Override
@@ -148,15 +120,15 @@ public class MovieVO extends DTO {
 		if (getClass() != obj.getClass())
 			return false;
 		MovieVO other = (MovieVO) obj;
-		return Objects.equals(movieId, other.movieId);
+		return Objects.equals(director, other.director) && Objects.equals(movieTitle, other.movieTitle)
+				&& Objects.equals(releaseDate, other.releaseDate);
 	}
 
 	@Override
 	public String toString() {
 		return "MovieVO [movieId=" + movieId + ", movieTitle=" + movieTitle + ", genre=" + genre + ", releaseDate="
 				+ releaseDate + ", country=" + country + ", runningTime=" + runningTime + ", filmRatings=" + filmRatings
-				+ ", director=" + director + ", actor=" + actor + ", movieRate=" + movieRate + "]";
+				+ ", director=" + director + ", actor=" + actor + "]";
 	}
-	
-	
+
 }

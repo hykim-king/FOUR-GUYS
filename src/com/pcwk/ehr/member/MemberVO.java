@@ -12,6 +12,7 @@ public class MemberVO extends DTO {
 	private String birthDate;  // 생년월일
 	private String regDt;      // 가입일
 	private String roleName;   // 권한명
+	private int balance = 0;
 	
 	public MemberVO() {
 		super();
@@ -27,6 +28,16 @@ public class MemberVO extends DTO {
 		this.birthDate = birthDate;
 		this.regDt = regDt;
 		this.roleName = roleName;
+	}
+	
+	
+
+	public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
 	}
 
 	public String getMemberId() {

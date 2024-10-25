@@ -6,6 +6,8 @@ public interface WorkDiv<T> {
 	
 	int readFile(String path);
 	
+	int writeFile(String path);
+	
 	/**
 	 * 등록
 	 * @param vo
@@ -40,4 +42,6 @@ public interface WorkDiv<T> {
 	 * @return MemberVO
 	 */
 	List<T> doRetrieve(DTO param);
+
+	
 }
